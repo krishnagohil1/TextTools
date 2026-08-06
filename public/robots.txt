@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://texttools.com
+Host: https://text-tools-swart.vercel.app
 
 # Sitemaps
-Sitemap: https://texttools.com/sitemap.xml
+Sitemap: https://text-tools-swart.vercel.app
