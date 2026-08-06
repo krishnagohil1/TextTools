@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   keywords: ["text tools", "word counter", "character counter", "seo tools", "case converter", "duplicate line remover"],
   authors: [{ name: "TextTools Team" }],
   creator: "TextTools",
+  verification: {
+    google: "H4iwDAN2zhQPslpxE1LgC9m_9WpAz6QV6G1ykKei0n0",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
