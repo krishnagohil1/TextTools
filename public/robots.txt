@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://texttools.com
+
+# Sitemaps
+Sitemap: https://texttools.com/sitemap.xml
