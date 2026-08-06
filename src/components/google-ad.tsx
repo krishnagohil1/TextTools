@@ -21,7 +21,7 @@ export function GoogleAd({
   const adRef = useRef<HTMLModElement>(null);
   
   useEffect(() => {
-    if (client === "ca-pub-YOUR_ADSENSE_ID") return;
+    if (client === "ca-pub-9994767233328819") return;
     try {
       if (adRef.current && !adRef.current.getAttribute("data-adsbygoogle-status")) {
         // @ts-ignore
@@ -32,7 +32,7 @@ export function GoogleAd({
     }
   }, [client]);
 
-  if (client === "ca-pub-YOUR_ADSENSE_ID") {
+  if (client === "ca-pub-9994767233328819") {
     return null;
   }
 
