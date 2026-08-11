@@ -21,9 +21,9 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://texttools.com/" },
-    { "@type": "ListItem", position: 2, name: "Tools", item: "https://texttools.com/tools" },
-    { "@type": "ListItem", position: 3, name: "Keyword Density Checker", item: "https://texttools.com/tools/keyword-density-checker" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://text-tools-swart.vercel.app/" },
+    { "@type": "ListItem", position: 2, name: "Tools", item: "https://text-tools-swart.vercel.app/tools" },
+    { "@type": "ListItem", position: 3, name: "Keyword Density Checker", item: "https://text-tools-swart.vercel.app/tools/keyword-density-checker" },
   ],
 };
 

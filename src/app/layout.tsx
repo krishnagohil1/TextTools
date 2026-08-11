@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://texttools.com",
+    url: "https://text-tools-swart.vercel.app",
     title: "TextTools - Free Online Text Tools",
     description: "Free Online Text Tools for Writers, Bloggers, Students & SEO Professionals.",
     siteName: "TextTools",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     shortcut: "/TextToolLogo.png",
     apple: "/TextToolLogo.png",
   },
-  metadataBase: new URL(process.env.SITE_URL || "https://texttools.com"),
+  metadataBase: new URL(process.env.SITE_URL || "https://text-tools-swart.vercel.app"),
 };
 
 export default function RootLayout({

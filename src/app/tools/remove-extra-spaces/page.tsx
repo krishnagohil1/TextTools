@@ -35,9 +35,9 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://texttools.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://texttools.com/tools" },
-    { "@type": "ListItem", "position": 3, "name": "Remove Extra Spaces", "item": "https://texttools.com/tools/remove-extra-spaces" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://text-tools-swart.vercel.app/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://text-tools-swart.vercel.app/tools" },
+    { "@type": "ListItem", "position": 3, "name": "Remove Extra Spaces", "item": "https://text-tools-swart.vercel.app/tools/remove-extra-spaces" }
   ]
 };
 

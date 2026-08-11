@@ -83,7 +83,7 @@ This is a **live** Markdown editor built into TextTools.
 ## Features
 
 - **Bold** and *italic* text
-- [Links](https://texttools.com)
+- [Links](https://text-tools-swart.vercel.app)
 - Inline \`code\` and code blocks
 - Lists, headings, blockquotes
 

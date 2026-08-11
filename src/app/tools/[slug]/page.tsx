@@ -107,9 +107,9 @@ export default async function ToolPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://texttools.com/" },
-      { "@type": "ListItem", position: 2, name: "Tools", item: "https://texttools.com/tools" },
-      { "@type": "ListItem", position: 3, name: tool.name, item: `https://texttools.com${tool.href}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://text-tools-swart.vercel.app/" },
+      { "@type": "ListItem", position: 2, name: "Tools", item: "https://text-tools-swart.vercel.app/tools" },
+      { "@type": "ListItem", position: 3, name: tool.name, item: `https://text-tools-swart.vercel.app${tool.href}` },
     ],
   };
 

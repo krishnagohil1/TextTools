@@ -37,9 +37,9 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://texttools.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://texttools.com/tools" },
-    { "@type": "ListItem", "position": 3, "name": "Case Converter", "item": "https://texttools.com/tools/case-converter" }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://text-tools-swart.vercel.app/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://text-tools-swart.vercel.app/tools" },
+    { "@type": "ListItem", "position": 3, "name": "Case Converter", "item": "https://text-tools-swart.vercel.app/tools/case-converter" }
   ]
 };
 
