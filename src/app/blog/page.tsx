@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Clock, Tag } from "lucide-react";
+import { ArrowRight, BookOpen, Calendar, Clock, Tag } from "lucide-react";
+import { ALL_BLOG_POSTS } from "@/lib/blog-data";
 
 export const metadata: Metadata = {
-  title: "Blog | TextTools - Tips for Writers",
-  description: "Read our latest articles on content writing, coding tips, and how to get the most out of TextTools.",
+  title: "Blog | TextTools - Tips, Tutorials & Guides for Writers",
+  description:
+    "Read our latest articles on content writing, SEO formatting, data cleaning, and how to get the most out of TextTools. Practical tips for writers and developers.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "TextTools Blog - Writing Tips & Tutorials",
+    description:
+      "Practical guides on text formatting, word count management, SEO, and digital productivity.",
+    url: "/blog",
+    type: "website",
+    siteName: "TextTools",
+  },
 };
 
 export default function BlogPage() {
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Hero */}
       <section className="relative pt-20 pb-16 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(255,255,255,1)_0%,rgba(240,248,255,1)_100%)] dark:bg-[linear-gradient(to_bottom,rgba(20,20,25,1)_0%,rgba(10,10,15,1)_100%)]" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] rounded-[100%] bg-gradient-to-tr from-blue-500/10 via-violet-500/10 to-pink-500/10 blur-[120px] -z-10 opacity-80" />
@@ -20,64 +32,145 @@ export default function BlogPage() {
             Tips, Tutorials & Guides
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
-            The TextTools <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">Blog</span>
+            The TextTools{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+              Blog
+            </span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Insights on writing efficiency, coding standards, and how to maximize your digital productivity.
+            Practical insights on writing efficiency, text formatting, SEO best
+            practices, and how to maximize your digital productivity.
           </p>
         </div>
       </section>
 
-      <section className="py-12 md:py-20 bg-background">
-        <div className="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg dark:prose-invert max-w-none">
-            
-            <h2>The Ultimate Guide to Mastering Text Productivity</h2>
-            <p>
-              In today’s fast-paced digital environment, the ability to process, format, and analyze text quickly is an invaluable skill. Whether you are drafting an important business proposal, writing a comprehensive academic paper, or developing a complex software application, text is the foundational medium of communication. However, managing text efficiently often requires a deep understanding of various formatting rules, character limits, and structural conventions. This comprehensive guide will walk you through the essential strategies for maximizing your productivity using modern text utilities.
-            </p>
+      {/* Featured Post */}
+      <section className="py-8 bg-background">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Link
+            href={`/blog/${ALL_BLOG_POSTS[0].slug}`}
+            className="group block rounded-2xl border border-border bg-card hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-300 overflow-hidden"
+          >
+            <div className="p-8 md:p-10">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-950/60 px-3 py-1 text-xs font-medium text-blue-700 dark:text-blue-300">
+                  <Tag className="h-3 w-3" />
+                  {ALL_BLOG_POSTS[0].category}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  Featured Article
+                </span>
+              </div>
 
-            <h3>1. The Importance of Tracking Word and Character Counts</h3>
-            <p>
-              One of the most fundamental aspects of digital writing is adhering to specific length constraints. Nearly every major platform imposes strict limits on the amount of text you can publish. For instance, microblogging platforms limit your thoughts to a very specific number of characters, requiring you to be incredibly concise and impactful with your words. On the other hand, academic journals and professional publications often demand a minimum word count to ensure a topic is covered with sufficient depth and rigor. 
-            </p>
-            <p>
-              By continuously monitoring your word and character counts as you write, you can pace your narrative effectively. Instead of writing a massive draft and then painstakingly cutting it down to fit a required limit, real-time tracking allows you to adjust your verbosity on the fly. This not only saves you hours of editing time but also helps you develop a sharper, more focused writing style. Furthermore, calculating the estimated reading and speaking time of your text is crucial for content creators who produce podcasts or video scripts, ensuring their material fits perfectly within their allocated broadcast slots.
-            </p>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                {ALL_BLOG_POSTS[0].title}
+              </h2>
 
-            <h3>2. Maintaining Formatting Consistency</h3>
-            <p>
-              Consistency is the hallmark of professional writing. When you copy and paste information from various sources—such as PDF documents, legacy websites, or different word processors—you almost inevitably inherit a mess of inconsistent formatting. This can manifest as strange line breaks, unpredictable capitalization, or invisible tab characters that completely ruin the visual structure of your document.
-            </p>
-            <p>
-              This is where case conversion and spacing utilities become absolute lifesavers. Being able to instantly transform an entire block of text into perfectly standardized lowercase, UPPERCASE, Title Case, or Sentence case eliminates the need for tedious manual retyping. Additionally, using tools to automatically strip out extra spaces, redundant line breaks, and hidden formatting characters ensures that your final document looks clean, polished, and ready for publication. In the world of software development, maintaining this kind of consistency is not just a matter of aesthetics; it is a critical requirement for ensuring that code compiles correctly and is readable by other engineers on your team.
-            </p>
+              <p className="text-muted-foreground leading-relaxed mb-6 max-w-3xl">
+                {ALL_BLOG_POSTS[0].excerpt}
+              </p>
 
-            <h3>3. Data Cleaning and Duplicate Removal</h3>
-            <p>
-              If you work with large datasets, marketing lists, or extensive code logs, you are undoubtedly familiar with the nightmare of duplicate data. When compiling information from multiple sources, it is extremely common for the same line of text to appear multiple times. Manually scanning through thousands of lines to find and delete these duplicates is an exercise in frustration and is highly prone to human error.
-            </p>
-            <p>
-              Automated duplicate line removers are incredibly powerful tools that can sanitize massive datasets in a fraction of a second. By simply pasting your raw data into a utility, you can instantly filter out all repetitive lines, leaving you with a perfectly clean, unique list. This process is essential for tasks like cleaning up email subscriber lists, deduplicating inventory logs, or consolidating research data. By automating this tedious task, you free up your mental bandwidth to focus on higher-level analysis and strategic thinking.
-            </p>
+              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-1.5">
+                  <Calendar className="h-3.5 w-3.5" />
+                  <time dateTime={ALL_BLOG_POSTS[0].publishedDate}>
+                    {new Date(
+                      ALL_BLOG_POSTS[0].publishedDate
+                    ).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Clock className="h-3.5 w-3.5" />
+                  <span>{ALL_BLOG_POSTS[0].readingTime} read</span>
+                </div>
+                <span className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 font-medium group-hover:gap-2 transition-all">
+                  Read article{" "}
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
 
-            <h3>4. The Philosophy of Client-Side Processing</h3>
-            <p>
-              As we rely more heavily on digital tools, the privacy and security of our data become increasingly critical concerns. Traditionally, web-based utilities required you to upload your text to a remote server, where it would be processed and then sent back to your browser. This architecture, while functional, poses severe security risks. If you are working with confidential client information, proprietary source code, or unreleased manuscripts, sending that data over the internet to an unknown server is a massive vulnerability.
-            </p>
-            <p>
-              The modern standard for text utilities is 100% client-side processing. This means that the application code runs entirely within your web browser, utilizing the processing power of your own device. Your text is never transmitted over a network, and it is never stored in a remote database. This zero-server-interaction model provides an ironclad guarantee of privacy. Furthermore, because there is no network latency involved, the tools operate with lightning-fast speed, providing instantaneous results as soon as you type or paste your content.
-            </p>
+      {/* All Posts Grid */}
+      <section className="py-12 md:py-16 bg-background">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold mb-8">All Articles</h2>
 
-            <h3>5. Creating a Frictionless Workflow</h3>
-            <p>
-              The ultimate goal of using text utilities is to create a frictionless workflow. Every time you have to stop what you are doing, open a heavy desktop application, or navigate through a complex menu system just to perform a simple text transformation, you lose your creative momentum. By bookmarking a fast, reliable, and comprehensive suite of web-based tools, you can seamlessly integrate these utilities into your daily routine. 
-            </p>
-            <p>
-              Whether you are quickly checking the character count of a social media post, converting a list of names into Title Case, or generating a placeholder text with Lorem Ipsum, having instant access to the right tool at the right time is a game-changer. We highly recommend exploring all the different utilities available to you and incorporating them into your regular workflow. The small amount of time you save on each formatting task compounds significantly over weeks and months, ultimately allowing you to achieve much higher levels of overall productivity.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {ALL_BLOG_POSTS.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="group flex flex-col rounded-2xl border border-border bg-card hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-300 overflow-hidden"
+              >
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 dark:bg-blue-950/60 px-2.5 py-0.5 text-xs font-medium text-blue-700 dark:text-blue-300">
+                      <Tag className="h-3 w-3" />
+                      {post.category}
+                    </span>
+                  </div>
 
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
+                    {post.title}
+                  </h3>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1 line-clamp-3">
+                    {post.excerpt}
+                  </p>
+
+                  <div className="flex items-center justify-between text-xs text-muted-foreground mt-auto pt-4 border-t border-border">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        <time dateTime={post.publishedDate}>
+                          {new Date(post.publishedDate).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            }
+                          )}
+                        </time>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        <span>{post.readingTime}</span>
+                      </div>
+                    </div>
+
+                    <ArrowRight className="h-3.5 w-3.5 text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="py-12 bg-muted/30 border-t border-border">
+        <div className="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl font-bold mb-3">
+            Ready to boost your productivity?
+          </h2>
+          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+            Explore our complete collection of free, privacy-first text tools.
+            No sign-up required.
+          </p>
+          <Link
+            href="/tools"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+          >
+            Browse All Tools <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
     </div>
