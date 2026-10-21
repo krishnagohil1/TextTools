@@ -312,24 +312,28 @@ export const TOOL_CONTENT_MAP: Record<string, ToolContent> = {
   },
   "random-text-generator": {
     title: "Random Text Generator - Free Dummy Text Creator",
-    metaDescription: "Generate random, readable placeholder text for design layouts, templates, and testing. Custom paragraph lengths.",
-    keywords: "random text generator, placeholder text, dummy text, copy text generator, mockup text generator, test data generator",
-    introduction: "Quickly generate random sentences and paragraphs for UI mockups, typographic styling, or layout tests without copying copyright text.",
+    metaDescription: "Generate random, readable placeholder text for design layouts, templates, and testing. Create natural-looking sample copy in seconds.",
+    keywords: "random text generator, placeholder text, dummy text, copy text generator, mockup text generator, test data generator, sample content generator",
+    introduction: "Our random text generator helps teams create natural-looking sample content for web mockups, landing pages, app prototypes, and design reviews. Instead of reusing repetitive filler phrases, you can generate fresh, readable text that feels closer to real copy for layout testing, typography checks, and stakeholder presentations.",
     features: [
-      "Generates random, readable sentences.",
-      "Customize the number of paragraphs to generate.",
-      "Clean copy-to-clipboard functionality.",
-      "Great alternative to standard lorem ipsum."
+      "Generates natural-sounding sample sentences and paragraphs for layouts and prototypes.",
+      "Lets you customize paragraph count and quickly produce fresh text variations.",
+      "Provides copy-to-clipboard support so you can paste content directly into a project.",
+      "Works as a practical alternative to standard Lorem Ipsum when your mockup needs more realistic-looking content.",
+      "Useful for developers, UI designers, marketers, and content teams testing real-world readability."
     ],
     steps: [
-      "Select the desired number of paragraphs.",
-      "Click 'Generate' to create new random text.",
-      "Copy the text or download it as a TXT file."
+      "Choose how many paragraphs of placeholder text you need for your design or test layout.",
+      "Click the Generate button to create fresh random sample copy.",
+      "Review the content, copy it, and paste it into your mockup, wireframe, campaign, or development project.",
+      "Generate a new variation whenever you want a different tone, length, or editorial flow."
     ],
-    whyImportant: "Using varied random text helps designers see how actual content fits into web structures better than repeating the same words.",
+    whyImportant: "Placeholder text is not just for visual testing. It helps teams evaluate readability, typography, spacing, and page flow before final content is approved. A realistic sample makes it easier to identify layout issues early and keep design presentations polished and professional.",
     faqs: [
-      { question: "Is this text in Latin or English?", answer: "Our random text generator creates English-like randomized sentences." },
-      { question: "Are there copyright issues with this text?", answer: "No, all generated text is 100% free to use for personal and commercial projects." }
+      { question: "Is this text good for website mockups and design prototypes?", answer: "Yes. It is designed to look like natural English copy, making it useful for UI mockups, landing-page layouts, and content staging before final text is ready." },
+      { question: "Is this text in Latin or English?", answer: "Our random text generator creates English-like randomized sentences that feel more natural than standard Lorem Ipsum." },
+      { question: "Can I use this in commercial projects?", answer: "Yes, the generated text is original and free to use for commercial, personal, and client-facing mockups and test layouts." },
+      { question: "Why not use only Lorem Ipsum?", answer: "Lorem Ipsum is useful for typography testing, but random English-like copy is often better for evaluating readability, pacing, and user experience with real-looking content blocks." }
     ],
     relatedTools: ["lorem-ipsum-generator", "text-splitter", "text-joiner", "remove-empty-lines"]
   },

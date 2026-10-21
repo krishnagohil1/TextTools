@@ -6,20 +6,11 @@ import { CopyButton } from "@/components/copy-button";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-// `ToolClient` receives a plain, serializable subset of the server `tool` object.
-interface ClientTool {
-  slug: string;
-  name?: string;
-  href?: string;
-  desc?: string;
-  type?: string;
-  category?: string;
-  seoDescription?: string;
-}
+import { ToolClientData } from "@/lib/tool-data";
 import { Copy, Trash2, Download, RefreshCcw } from "lucide-react";
 
 interface ToolClientProps {
-  tool: ClientTool;
+  tool: ToolClientData;
 }
 
 type CaseMode = "uppercase" | "lowercase" | "titlecase" | "sentencecase" | "togglecase";
@@ -240,11 +231,7 @@ export default function ToolClient({ tool }: ToolClientProps) {
         return shuffleArray(words).join("");
       }
       case "trim-text":
-        return normalized
-          .split("\n")
-          .map((line) => line.trim())
-          .filter((line) => line.length > 0)
-          .join("\n");
+        return text.trim();
       case "find-and-replace": {
         if (!replaceFrom) return text;
         try {
@@ -262,13 +249,10 @@ export default function ToolClient({ tool }: ToolClientProps) {
       case "text-splitter": {
         if (!splitDelimiter) return text;
         if (splitDelimiter === "sentence") {
-          return (text.match(sentenceRegex) || []).map((item) => item.trim()).filter(Boolean).join("\n");
+          return (text.match(sentenceRegex) || []).join("\n");
         }
         if (splitDelimiter === "line") {
-          return normalized.split("\n").map((item) => item.trim()).filter(Boolean).join("\n");
-        }
-        if (splitDelimiter === " ") {
-          return text.split(/\s+/).map((item) => item.trim()).filter(Boolean).join("\n");
+          return normalized.split("\n").filter(Boolean).join("\n");
         }
         return text.split(splitDelimiter).map((item) => item.trim()).filter(Boolean).join("\n");
       }
@@ -348,7 +332,9 @@ export default function ToolClient({ tool }: ToolClientProps) {
   };
 
   useEffect(() => {
-    setOutputText(processText());
+    if (!isGenerator) {
+      setOutputText(processText());
+    }
   }, [inputText, inputTextB, caseMode, sortDirection, shuffleMode, splitDelimiter, joinerSeparator, replaceFrom, replaceTo, useRegex, generatorCount, removeTabs, removeExtraSpaces, removeEmptyLines, sortOutputEntries, ignoreCase, preserveOrder, tool.slug]);
 
   const handleGenerate = () => {
@@ -565,106 +551,54 @@ export default function ToolClient({ tool }: ToolClientProps) {
     }
   };
 
-  const isAnalysisOnly = [
-    "word-counter",
-    "character-counter",
-    "sentence-counter",
-    "paragraph-counter",
-    "speaking-time-calculator",
-    "reading-time-calculator",
-    "text-statistics",
-    "keyword-density-checker",
-  ].includes(tool.slug);
-
   return (
     <div className="space-y-6">
       {renderStats()}
 
-      {isAnalysisOnly ? (
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">Input Text</h2>
-            <div className="flex items-center gap-2">
-              <CopyButton textToCopy={inputText} />
-              <Button size="sm" variant="outline" onClick={handleClear} disabled={!inputText}>
-                <Trash2 className="h-4 w-4 mr-2" /> Clear
-              </Button>
-            </div>
+            <Button size="sm" variant="outline" onClick={handleClear} disabled={!inputText && !inputTextB}>
+              <Trash2 className="h-4 w-4 mr-2" /> Clear
+            </Button>
           </div>
-
-          <Textarea
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            placeholder="Type or paste your text here to analyze statistics..."
-            className="min-h-[300px] text-base leading-relaxed"
-          />
+          {tool.slug === "text-compare" ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div>
+                <Label className="block mb-2">Text A</Label>
+                <Textarea value={inputText} onChange={(e) => setInputText(e.target.value)} placeholder="Enter the first text block..." className="min-h-[220px]" />
+              </div>
+              <div>
+                <Label className="block mb-2">Text B</Label>
+                <Textarea value={inputTextB} onChange={(e) => setInputTextB(e.target.value)} placeholder="Enter the second text block..." className="min-h-[220px]" />
+              </div>
+            </div>
+          ) : (
+            <Textarea
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder={tool.slug === "random-text-generator" || tool.slug === "lorem-ipsum-generator" ? "Use generate to create placeholder text." : "Type or paste your text here..."}
+              className="min-h-[280px]"
+            />
+          )}
 
           <div>{renderToolOptions()}</div>
         </div>
-      ) : isGenerator ? (
-        <div className="space-y-6">
-          <div className="bg-card border rounded-lg p-4">
-            {renderToolOptions()}
-          </div>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Generated Output</h2>
-              <div className="flex items-center gap-2">
-                <CopyButton textToCopy={outputText} />
-                <Button size="sm" variant="outline" onClick={handleDownload} disabled={!outputText}>
-                  <Download className="h-4 w-4 mr-2" /> Download
-                </Button>
-              </div>
-            </div>
-            <Textarea value={outputText} readOnly placeholder="Click Generate to produce placeholder text..." className="min-h-[300px] text-base leading-relaxed" />
-          </div>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Input Text</h2>
-              <Button size="sm" variant="outline" onClick={handleClear} disabled={!inputText && !inputTextB}>
-                <Trash2 className="h-4 w-4 mr-2" /> Clear
+
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold">Output</h2>
+            <div className="flex items-center gap-2">
+              <CopyButton textToCopy={outputText} />
+              <Button size="sm" variant="outline" onClick={handleDownload} disabled={!outputText}>
+                <Download className="h-4 w-4 mr-2" /> Download
               </Button>
             </div>
-            {tool.slug === "text-compare" ? (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div>
-                  <Label className="block mb-2">Text A</Label>
-                  <Textarea value={inputText} onChange={(e) => setInputText(e.target.value)} placeholder="Enter the first text block..." className="min-h-[220px]" />
-                </div>
-                <div>
-                  <Label className="block mb-2">Text B</Label>
-                  <Textarea value={inputTextB} onChange={(e) => setInputTextB(e.target.value)} placeholder="Enter the second text block..." className="min-h-[220px]" />
-                </div>
-              </div>
-            ) : (
-              <Textarea
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                placeholder={tool.slug === "random-text-generator" || tool.slug === "lorem-ipsum-generator" ? "Use generate to create placeholder text." : "Type or paste your text here..."}
-                className="min-h-[280px]"
-              />
-            )}
-
-            <div>{renderToolOptions()}</div>
           </div>
-
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Output</h2>
-              <div className="flex items-center gap-2">
-                <CopyButton textToCopy={outputText} />
-                <Button size="sm" variant="outline" onClick={handleDownload} disabled={!outputText}>
-                  <Download className="h-4 w-4 mr-2" /> Download
-                </Button>
-              </div>
-            </div>
-            <Textarea value={outputText} readOnly placeholder="Your output appears here..." className="min-h-[280px]" />
-          </div>
+          <Textarea value={outputText} readOnly placeholder="Your output appears here..." className="min-h-[280px]" />
         </div>
-      )}
+      </div>
     </div>
   );
 }

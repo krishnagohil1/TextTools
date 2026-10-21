@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Script from "next/script";
 import TextCompareClient from "./text-compare-client";
 import { CheckCircle2, GitBranch } from "lucide-react";
 import Link from "next/link";
@@ -31,7 +30,7 @@ const breadcrumbJsonLd = {
 export default function TextComparePage() {
   return (
     <>
-      <Script id="textcompare-breadcrumb" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
       <div className="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
         <div className="mb-8">

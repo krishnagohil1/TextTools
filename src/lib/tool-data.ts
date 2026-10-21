@@ -45,6 +45,13 @@ export interface ToolDefinition {
   seoDescription: string;
 }
 
+export type ToolClientData = Omit<ToolDefinition, "icon">;
+
+export function toToolClientData(tool: ToolDefinition): ToolClientData {
+  const { icon: _icon, ...serializableTool } = tool;
+  return serializableTool;
+}
+
 export const ALL_TOOLS: ToolDefinition[] = [
   {
     slug: "word-counter",
@@ -193,12 +200,12 @@ export const ALL_TOOLS: ToolDefinition[] = [
     slug: "random-text-generator",
     name: "Random Text Generator",
     href: "/tools/random-text-generator",
-    desc: "Generate random placeholder text for demos, testing, or creative prompts.",
+    desc: "Generate natural-looking placeholder text for mockups, prototypes, and layout testing.",
     icon: Sparkles,
     type: "generator",
     category: "Generators",
     seoDescription:
-      "Generate random dummy text for testing, demos, and creative writing prompts instantly.",
+      "Create realistic placeholder paragraphs for website mockups, design reviews, and UI testing without using repetitive Lorem Ipsum.",
   },
   {
     slug: "lorem-ipsum-generator",

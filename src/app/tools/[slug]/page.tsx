@@ -1,45 +1,21 @@
 import { Metadata } from "next";
 import Script from "next/script";
 import Link from "next/link";
-import { TOOL_MAP } from "@/lib/tool-data";
-import { TOOL_CONTENT_MAP } from "@/lib/tool-content";
+import { TOOL_MAP, toToolClientData } from "@/lib/tool-data";
 import { ArrowRight } from "lucide-react";
 import ToolClient from "./tool-client";
-import { ToolSeoContent } from "@/components/tool-seo-content";
-import { GrammarlyAffiliate } from "@/components/grammarly-affiliate";
-import { GoogleAd } from "@/components/google-ad";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
-const DEDICATED_SLUGS = new Set([
-  "word-counter",
-  "character-counter",
-  "case-converter",
-  "duplicate-line-remover",
-  "keyword-density-checker",
-  "markdown-preview",
-  "paragraph-counter",
-  "random-text-generator",
-  "reading-time-calculator",
-  "remove-extra-spaces",
-  "sentence-counter",
-  "speaking-time-calculator",
-  "text-compare",
-  "text-statistics",
-]);
-
 export async function generateStaticParams() {
-  return Array.from(TOOL_MAP.keys())
-    .filter((slug) => !DEDICATED_SLUGS.has(slug))
-    .map((slug) => ({ slug }));
+  return Array.from(TOOL_MAP.keys()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tool = TOOL_MAP.get(slug);
-  const content = TOOL_CONTENT_MAP[slug];
 
   if (!tool) {
     return {
@@ -48,26 +24,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const title = content?.title || `${tool.name} — TextTools`;
-  const description = content?.metaDescription || tool.seoDescription;
-  const keywords = content?.keywords || `${tool.name.toLowerCase()}, text tools, online formatter`;
-
   return {
-    title,
-    description,
-    keywords,
+    title: `${tool.name} — TextTools`,
+    description: tool.seoDescription,
     alternates: { canonical: tool.href },
     openGraph: {
-      title,
-      description,
+      title: `${tool.name} — TextTools`,
+      description: tool.seoDescription,
       url: tool.href,
-      type: "website",
-      siteName: "TextTools",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
     },
   };
 }
@@ -75,7 +39,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ToolPage({ params }: Props) {
   const { slug } = await params;
   const tool = TOOL_MAP.get(slug);
-  const content = TOOL_CONTENT_MAP[slug];
 
   if (!tool) {
     return (
@@ -89,52 +52,30 @@ export default async function ToolPage({ params }: Props) {
     );
   }
 
-  const softwareJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: tool.name,
-    operatingSystem: "All",
-    applicationCategory: "UtilitiesApplication",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
-    description: content?.metaDescription || tool.seoDescription,
-  };
-
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://text-tools-swart.vercel.app/" },
-      { "@type": "ListItem", position: 2, name: "Tools", item: "https://text-tools-swart.vercel.app/tools" },
-      { "@type": "ListItem", position: 3, name: tool.name, item: `https://text-tools-swart.vercel.app${tool.href}` },
-    ],
-  };
-
-  const faqJsonLd = content?.faqs?.length
-    ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: content.faqs.map((faq) => ({
-          "@type": "Question",
-          name: faq.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: faq.answer,
-          },
-        })),
-      }
-    : null;
-
   return (
     <>
-      <Script id="tool-jsonld" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }} />
-      <Script id="tool-breadcrumb" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      {faqJsonLd && (
-        <Script id="tool-faq-jsonld" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      )}
+      <Script id="tool-jsonld" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: tool.name,
+        operatingSystem: "All",
+        applicationCategory: "UtilitiesApplication",
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+        },
+        description: tool.seoDescription,
+      })}} />
+      <Script id="tool-breadcrumb" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://text-tools-swart.vercel.app/" },
+          { "@type": "ListItem", position: 2, name: "Tools", item: "https://text-tools-swart.vercel.app/tools" },
+          { "@type": "ListItem", position: 3, name: tool.name, item: `https://text-tools-swart.vercel.app${tool.href}` },
+        ],
+      })}} />
 
       <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl">
         <div className="mb-8">
@@ -154,24 +95,8 @@ export default async function ToolPage({ params }: Props) {
         </div>
 
         <div className="rounded-3xl border border-border bg-card p-6">
-          {/** Pass a plain serializable object to the client component (remove non-serializable icon) */}
-          <ToolClient
-            tool={{
-              slug: tool.slug,
-              name: tool.name,
-              href: tool.href,
-              desc: tool.desc,
-              type: tool.type,
-              category: tool.category,
-              seoDescription: tool.seoDescription,
-            }}
-          />
+          <ToolClient tool={toToolClientData(tool)} />
         </div>
-
-        <GrammarlyAffiliate />
-        <GoogleAd slot="TOOL_PAGE_SLOT_ID" />
-
-        {content && <ToolSeoContent content={content} />}
       </div>
     </>
   );
