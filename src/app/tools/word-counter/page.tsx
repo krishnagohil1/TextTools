@@ -4,6 +4,7 @@ import WordCounterClient from "./word-counter-client";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { GrammarlyAffiliate } from "@/components/grammarly-affiliate";
+import { ToolPageAd } from "@/components/tool-page-ad";
 
 export const metadata: Metadata = {
   title: "Free Online Word Counter - Character & Word Count Tool",
@@ -47,7 +48,8 @@ export default function WordCounterPage() {
     <>
       <Script id="wordcounter-jsonld" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Script id="wordcounter-breadcrumb" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      
+
+      <ToolPageAd position="top" />
       <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl">
         {/* Tool Header */}
         <div className="mb-8">
@@ -132,6 +134,7 @@ export default function WordCounterPage() {
           </div>
         </article>
       </div>
+      <ToolPageAd position="bottom" />
     </>
   );
 }

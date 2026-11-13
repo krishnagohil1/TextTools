@@ -3,6 +3,7 @@ import Script from "next/script";
 import RemoveExtraSpacesClient from "./remove-extra-spaces-client";
 import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import { ToolPageAd } from "@/components/tool-page-ad";
 
 export const metadata: Metadata = {
   title: "Remove Extra Spaces - Clean Up Text Format Tool",
@@ -46,7 +47,8 @@ export default function RemoveExtraSpacesPage() {
     <>
       <Script id="removeextraspaces-jsonld" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Script id="removeextraspaces-breadcrumb" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      
+
+      <ToolPageAd position="top" />
       <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl">
         {/* Tool Header */}
         <div className="mb-8">
@@ -109,6 +111,7 @@ export default function RemoveExtraSpacesPage() {
           </ol>
         </article>
       </div>
+      <ToolPageAd position="bottom" />
     </>
   );
 }

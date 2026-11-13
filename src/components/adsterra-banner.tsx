@@ -104,11 +104,25 @@ export function AdsterraBanner({
   }, [adKey, height, mediaQuery, width]);
 
   return (
-    <aside className={className} style={{ transform: `scale(${scale})` }}>
+    <aside
+      className={className}
+      style={{
+        width: width * scale,
+        height: height * scale,
+        display: "grid",
+        justifyItems: "center",
+        alignContent: "start",
+      }}
+    >
       <div
         ref={adContainerRef}
-        className="mx-auto max-w-full overflow-hidden"
-        style={{ width, minHeight: height, height }}
+        className="max-w-full overflow-hidden"
+        style={{
+          width,
+          height,
+          transform: `scale(${scale})`,
+          transformOrigin: "top center",
+        }}
       >
         {loadError && (
           <p role="status" className="text-center text-sm text-muted-foreground">

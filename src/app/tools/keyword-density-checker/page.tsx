@@ -4,6 +4,7 @@ import KeywordDensityClient from "./keyword-density-client";
 import { CheckCircle2, Search } from "lucide-react";
 import Link from "next/link";
 import { AffiliateBanner, AffiliateLink } from "@/components/affiliate-banner";
+import { LatestToolPageAds } from "@/components/latest-tool-page-ads";
 
 export const metadata: Metadata = {
   title: "Keyword Density Checker - Analyze Keyword Frequency & SEO",
@@ -32,6 +33,7 @@ export default function KeywordDensityCheckerPage() {
     <>
       <Script id="keyworddensity-breadcrumb" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
+      <LatestToolPageAds position="top" />
       <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl">
         <div className="mb-8">
           <nav className="flex text-sm text-muted-foreground mb-4" aria-label="Breadcrumb">
@@ -76,6 +78,7 @@ export default function KeywordDensityCheckerPage() {
           </ul>
         </article>
       </div>
+      <LatestToolPageAds position="bottom" />
     </>
   );
 }

@@ -4,6 +4,7 @@ import CaseConverterClient from "./case-converter-client";
 import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { GrammarlyAffiliate } from "@/components/grammarly-affiliate";
+import { ToolPageAd } from "@/components/tool-page-ad";
 
 export const metadata: Metadata = {
   title: "Case Converter - Change Text to Uppercase, Lowercase & Title Case",
@@ -47,7 +48,8 @@ export default function CaseConverterPage() {
     <>
       <Script id="caseconverter-jsonld" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Script id="caseconverter-breadcrumb" type="application/ld+json" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      
+
+      <ToolPageAd position="top" />
       <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl">
         {/* Tool Header */}
         <div className="mb-8">
@@ -108,6 +110,7 @@ export default function CaseConverterPage() {
           </ul>
         </article>
       </div>
+      <ToolPageAd position="bottom" />
     </>
   );
 }

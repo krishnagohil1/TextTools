@@ -37,6 +37,8 @@ import { TypingGame } from "@/components/typing-game";
 import { ToolSearch } from "@/components/tool-search";
 import { FloatingToolsGraphic } from "@/components/floating-tools-graphic";
 import { AdsterraBanner } from "@/components/adsterra-banner";
+import { HilltopBanner } from "@/components/hilltop-banner";
+import { PopularToolCard } from "@/components/popular-tool-card";
 
 /* ------------------------------------------------------------------ */
 /*  DATA                                                               */
@@ -436,34 +438,37 @@ const faqs = [
 export default function Home() {
   return (
     <div className="relative flex flex-col">
-      <div className="fixed inset-y-0 left-[max(0px,calc(50%-946px))] z-30 hidden -translate-x-[15%] items-center min-[1400px]:flex">
-        <AdsterraBanner
-          adKey="025f682c0b126f990846b450d3406f42"
-          width={300}
-          height={250}
-          scale={0.5}
-          mediaQuery="(min-width: 1400px)"
-          className=""
-        />
+      <div className="fixed inset-y-0 left-[max(12px,calc(50%-946px))] z-30 hidden items-center min-[1400px]:flex">
+        <div className="flex flex-col items-center gap-3">
+          <HilltopBanner />
+          <AdsterraBanner
+            adKey="025f682c0b126f990846b450d3406f42"
+            width={300}
+            height={250}
+            scale={0.9}
+            mediaQuery="(min-width: 1400px)"
+            className=""
+          />
+        </div>
       </div>
       <div className="fixed inset-y-0 right-[max(3rem,calc(50%-876px))] z-30 hidden items-center min-[1400px]:flex">
         <AdsterraBanner
           adKey="a78d8f12d613d0bce4fa94dc63858629"
           width={160}
           height={600}
-          scale={0.75}
+          scale={0.95}
           mediaQuery="(min-width: 1400px)"
           className=""
         />
       </div>
 
       {/* ─── HERO ─────────────────────────────────────────────── */}
-      <section className="relative pt-20 pb-20 md:pt-28 md:pb-29 overflow-x-hidden">
+      <section className="relative overflow-x-clip pt-12 pb-12 md:pt-20 md:pb-20">
         {/* Background decorations */}
         <div className="absolute inset-0 -z-1" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] rounded-[100%] bg-gradient-to-tr from-blue-500/20 via-violet-500/20 to-pink-500/20 blur-[120px] -z-10 opacity-80" />
 
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-center lg:text-left">
             <div className="lg:col-span-7 flex flex-col items-center lg:items-start">
               <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 dark:border-blue-800 bg-blue-50/80 dark:bg-blue-950/40 px-4 py-1.5 mb-8 text-sm text-blue-700 dark:text-blue-300 backdrop-blur-sm">
@@ -520,22 +525,13 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {allTools.slice(0, 4).map((tool) => (
-              <Link
+              <PopularToolCard
                 key={tool.name}
+                name={tool.name}
+                desc={tool.desc}
                 href={tool.href}
-                className="group relative p-6 rounded-3xl border border-border bg-card/50 hover:bg-card backdrop-blur-sm hover:shadow-2xl hover:shadow-blue-500/10 hover:border-blue-300 dark:hover:border-blue-700 hover:-translate-y-1 transition-all duration-300 block"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500/10 to-violet-500/10 flex items-center justify-center">
-                    <tool.icon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </div>
-                <h3 className="font-semibold text-lg mb-1.5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {tool.name}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{tool.desc}</p>
-              </Link>
+                icon={tool.icon}
+              />
             ))}
           </div>
 

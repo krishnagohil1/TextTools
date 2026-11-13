@@ -3,7 +3,7 @@ import TextCompareClient from "./text-compare-client";
 import { CheckCircle2, GitBranch } from "lucide-react";
 import Link from "next/link";
 import { AffiliateBanner, AffiliateLink } from "@/components/affiliate-banner";
-import { AdsterraBanner } from "@/components/adsterra-banner";
+import { LatestToolPageAds } from "@/components/latest-tool-page-ads";
 
 export const metadata: Metadata = {
   title: "Text Compare - Find Differences Between Two Texts",
@@ -32,6 +32,7 @@ export default function TextComparePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
+      <LatestToolPageAds position="top" />
       <div className="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
         <div className="mb-8">
           <nav className="flex text-sm text-muted-foreground mb-4" aria-label="Breadcrumb">
@@ -59,8 +60,6 @@ export default function TextComparePage() {
           <AffiliateLink href="https://cursor.com/" variant="primary">Cursor AI</AffiliateLink>
         </AffiliateBanner>
 
-        <AdsterraBanner />
-
         <article className="prose prose-slate dark:prose-invert max-w-none">
           <h2 className="text-2xl font-semibold mb-4">What Is a Text Compare Tool?</h2>
           <p className="mb-6 leading-relaxed">
@@ -80,6 +79,7 @@ export default function TextComparePage() {
           </ul>
         </article>
       </div>
+      <LatestToolPageAds position="bottom" />
     </>
   );
 }
