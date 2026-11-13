@@ -436,11 +436,12 @@ const faqs = [
 export default function Home() {
   return (
     <div className="relative flex flex-col">
-      <div className="fixed inset-y-0 left-[max(0px,calc(50%-916px))] z-30 hidden items-center min-[1400px]:flex">
+      <div className="fixed inset-y-0 left-[max(0px,calc(50%-946px))] z-30 hidden -translate-x-[15%] items-center min-[1400px]:flex">
         <AdsterraBanner
           adKey="025f682c0b126f990846b450d3406f42"
           width={300}
           height={250}
+          scale={0.5}
           mediaQuery="(min-width: 1400px)"
           className=""
         />
@@ -450,6 +451,7 @@ export default function Home() {
           adKey="a78d8f12d613d0bce4fa94dc63858629"
           width={160}
           height={600}
+          scale={0.75}
           mediaQuery="(min-width: 1400px)"
           className=""
         />

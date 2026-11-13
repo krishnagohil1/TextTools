@@ -7,6 +7,7 @@ interface AdsterraBannerProps {
   adKey?: string;
   width?: number;
   height?: number;
+  scale?: number;
   className?: string;
 }
 
@@ -29,6 +30,7 @@ export function AdsterraBanner({
   adKey = "025f682c0b126f990846b450d3406f42",
   width = 300,
   height = 250,
+  scale = 1,
   className = "my-8",
 }: AdsterraBannerProps) {
   const adContainerRef = useRef<HTMLDivElement>(null);
@@ -102,7 +104,7 @@ export function AdsterraBanner({
   }, [adKey, height, mediaQuery, width]);
 
   return (
-    <aside className={className}>
+    <aside className={className} style={{ transform: `scale(${scale})` }}>
       <div
         ref={adContainerRef}
         className="mx-auto max-w-full overflow-hidden"
