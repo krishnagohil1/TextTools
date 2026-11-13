@@ -23,8 +23,13 @@ export const metadata: Metadata = {
   keywords: ["text tools", "word counter", "character counter", "seo tools", "case converter", "duplicate line remover"],
   authors: [{ name: "TextTools Team" }],
   creator: "TextTools",
+  referrer: "no-referrer-when-downgrade",
   verification: {
     google: "H4iwDAN2zhQPslpxE1LgC9m_9WpAz6QV6G1ykKei0n0",
+  },
+  other: {
+    "7d90c6c1d0055b1fed8f440e79e669880e85e060":
+      "7d90c6c1d0055b1fed8f440e79e669880e85e060",
   },
   openGraph: {
     type: "website",
