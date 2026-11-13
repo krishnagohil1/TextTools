@@ -36,6 +36,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { TypingGame } from "@/components/typing-game";
 import { ToolSearch } from "@/components/tool-search";
 import { FloatingToolsGraphic } from "@/components/floating-tools-graphic";
+import { AdsterraBanner } from "@/components/adsterra-banner";
 
 /* ------------------------------------------------------------------ */
 /*  DATA                                                               */
@@ -434,7 +435,26 @@ const faqs = [
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <div className="relative flex flex-col">
+      <div className="fixed inset-y-0 left-[max(0px,calc(50%-916px))] z-30 hidden items-center min-[1400px]:flex">
+        <AdsterraBanner
+          adKey="025f682c0b126f990846b450d3406f42"
+          width={300}
+          height={250}
+          mediaQuery="(min-width: 1400px)"
+          className=""
+        />
+      </div>
+      <div className="fixed inset-y-0 right-[max(3rem,calc(50%-876px))] z-30 hidden items-center min-[1400px]:flex">
+        <AdsterraBanner
+          adKey="a78d8f12d613d0bce4fa94dc63858629"
+          width={160}
+          height={600}
+          mediaQuery="(min-width: 1400px)"
+          className=""
+        />
+      </div>
+
       {/* ─── HERO ─────────────────────────────────────────────── */}
       <section className="relative pt-20 pb-20 md:pt-28 md:pb-29 overflow-x-hidden">
         {/* Background decorations */}
@@ -672,6 +692,10 @@ export default function Home() {
 
       {/* ─── TYPING GAME ──────────────────────────────────────── */}
       <TypingGame />
+
+      <div className="min-[1400px]:hidden">
+        <AdsterraBanner mediaQuery="(max-width: 1399px)" />
+      </div>
     </div>
   );
 }

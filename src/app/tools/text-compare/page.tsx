@@ -3,23 +3,7 @@ import TextCompareClient from "./text-compare-client";
 import { CheckCircle2, GitBranch } from "lucide-react";
 import Link from "next/link";
 import { AffiliateBanner, AffiliateLink } from "@/components/affiliate-banner";
-
-const adFrameContent = `<!doctype html>
-<html>
-  <head><meta name="viewport" content="width=device-width, initial-scale=1"></head>
-  <body style="margin:0">
-    <script>
-      var atOptions = {
-        key: "025f682c0b126f990846b450d3406f42",
-        format: "iframe",
-        height: 250,
-        width: 300,
-        params: {}
-      };
-    </script>
-    <script src="https://bauval.org/22/025f682c0b126f990846b450d3406f42"></script>
-  </body>
-</html>`;
+import { AdsterraBanner } from "@/components/adsterra-banner";
 
 export const metadata: Metadata = {
   title: "Text Compare - Find Differences Between Two Texts",
@@ -75,21 +59,7 @@ export default function TextComparePage() {
           <AffiliateLink href="https://cursor.com/" variant="primary">Cursor AI</AffiliateLink>
         </AffiliateBanner>
 
-        <aside aria-label="Advertisement" className="my-8">
-          <p className="mb-2 text-center text-xs text-muted-foreground">Advertisement</p>
-          <div className="flex justify-center">
-            <iframe
-              title="Advertisement"
-              width={300}
-              height={250}
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-              sandbox="allow-scripts allow-popups"
-              srcDoc={adFrameContent}
-              className="max-w-full border-0"
-            />
-          </div>
-        </aside>
+        <AdsterraBanner />
 
         <article className="prose prose-slate dark:prose-invert max-w-none">
           <h2 className="text-2xl font-semibold mb-4">What Is a Text Compare Tool?</h2>
